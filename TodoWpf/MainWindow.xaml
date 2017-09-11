@@ -1,0 +1,41 @@
+﻿<Window x:Class="TodoWpf.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TodoWpf"
+        mc:Ignorable="d"
+        Title="Todo" Height="437.839" Width="429.93" WindowStartupLocation="CenterScreen">
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="71*"></RowDefinition>
+            <RowDefinition Height="132*"></RowDefinition>
+            <RowDefinition Height="98*"></RowDefinition>
+            <RowDefinition Height="27*"/>
+            <RowDefinition Height="79*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="164*"></ColumnDefinition>
+            <ColumnDefinition Width="47*"></ColumnDefinition>
+
+        </Grid.ColumnDefinitions>
+
+
+        <TextBox x:Name="textBox" Grid.Row="0" Grid.Column="0" Margin="10,10,10,14" TextWrapping="Wrap" KeyUp="textBox_KeyUp"/>
+        <Button x:Name="button" Grid.Row="0" Content="Add" Grid.Column="1" Margin="10,9,9,14" Click="button_Click"/>
+        <DataGrid x:Name="dataGrid" Margin="10,14,10,1" Grid.Row="1" Grid.RowSpan="2" Grid.ColumnSpan="2"
+                  ItemsSource="{Binding Todos}" DisplayMemberPath="Name" SelectedItem="{Binding SelectedTodo}" SelectionMode="Single" CellEditEnding="dataGrid_CellEditEnding" CurrentCellChanged="dataGrid_CurrentCellChanged" CanUserAddRows="False" AutoGenerateColumns="False" >
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Name}" ClipboardContentBinding="{x:Null}" Header="Name" Width="*" />
+                <DataGridCheckBoxColumn Binding="{Binding Done}" ClipboardContentBinding="{x:Null}" Header="Done" Width="80"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <ListBox x:Name="listBox" Margin="10"
+                 Grid.Row="4" Grid.ColumnSpan="2" 
+                 ItemsSource="{Binding Todos}" DisplayMemberPath="Done" SelectedItem="{Binding SelectedTodo}"  />
+        <Button x:Name="button1" Content="Delete" Grid.Column="1" Margin="9,4,10,3" Grid.Row="3" Click="button1_Click"/>
+
+    </Grid>
+</Window>
